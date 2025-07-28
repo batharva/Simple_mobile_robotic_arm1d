@@ -34,46 +34,19 @@
     <origin xyz="${(base_length + camera_length) / 2} 0 ${base_height}" rpy="0 0 0"/>
   </joint>
 
-  <!-- opencv ke liye -->
-  <link name="camera_link_optical"/>
-  <joint name="camera_optical_joint" type="fixed">
-    <parent link="camera_link"/>
-    <child link="camera_link_optical"/>
-    <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
-  </joint>
-  <!-- Gazebo Plugin for Camera -->
-  <gazebo reference ="camera_link">
+  <!-- Gazebo sensor plugin -->
+  <gazebo reference="camera_link">
     <sensor name="camera_sensor" type="camera">
-      <camera>
-        <horizontal_fov>1.0472</horizontal_fov>
-        <image>
-          <width>640</width>
-          <height>480</height>
-          <format>R8G8B8</format>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>15.0</far>
-        </clip>
-        <noice>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.07</stddev>
-        </noice>
-        <optical_frame_id>camera_link_optical</optical_frame_id>
-        <camera_info_topic>camera/camera_info</camera_info_topic>
-      </camera>
-      <always_on>1</always_on>
-      <update_rate>20.0</update_rate>
+      <pose>0 0 0 0 0 0</pose>
       <visualize>true</visualize>
-      <topic>camera/image_raw</topic>
+      <update_rate>10.0</update_rate>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <frame_name>camera_link</frame_name>
+      </plugin>
     </sensor>
   </gazebo>
-  
+
 </robot>
-  
 
 <!-- 
 Gazebo camera and open cv ke liye lec 79 check kar  will be delete after 2025 end-->
-<!-- 
-opencv ke liye jo frame honi chahiye to y axis se honi chahiye  -->

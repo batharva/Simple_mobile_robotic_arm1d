@@ -11,7 +11,6 @@ install(DIRECTORY
   launch
   rviz
   world
-  config
   DESTINATION share/${PROJECT_NAME}/
 )
 ament_package()
